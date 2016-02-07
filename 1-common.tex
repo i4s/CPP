@@ -1,0 +1,263 @@
+\documentclass[10pt,pdf,hyperref={unicode}]{beamer}
+% \documentclass[aspectratio=43]{beamer}
+% \documentclass[aspectratio=1610]{beamer}
+% \documentclass[aspectratio=169]{beamer}
+
+\usepackage{lmodern}
+
+% подключаем кириллицу 
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{listings}
+\usepackage{textcomp}
+% \usepackage[T1]{fontenc}
+
+% отключить клавиши навигации
+\setbeamertemplate{navigation symbols}{}
+
+% тема оформления
+\usetheme{CambridgeUS}
+
+% цветовая схема
+\usecolortheme{lily}
+
+\title{КПП}   
+\subtitle{Кроссплатформенное программирование}
+\author{\tiny https://github.com/i4s}
+\date{\tiny \today} 
+\logo{\includegraphics[height=15mm]{images/logo.jpg}\vspace{-7pt}}
+
+\begin{document}
+
+% титульный слайд
+\begin{frame}
+\titlepage
+\end{frame} 
+
+\begin{frame}
+\frametitle{Введение в курс} 
+\framesubtitle{Процесс проведения занятий}
+\begin{enumerate}
+  \item 8 общих занятий
+  \begin{enumerate}
+    \item вопросы по предыдущему материалу
+    \item немного теории
+    \item приём лабораторных работ
+  \end{enumerate}
+  \item 8 занятий в подгруппах
+  \begin{enumerate}
+    \item получение лабораторных заданий
+    \item практика изученной теории
+  \end{enumerate}
+  \item "А \underline{ходить} надо?"(с)
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+\frametitle{Введение в курс} 
+\framesubtitle{Правила игры просты...}
+\begin{enumerate}
+  \item 8 лабораторных работ
+  \begin{enumerate}
+    \item 4 - Java (Февраль-Март)
+    \item 4 - Scala (Апрель-Май)
+  \end{enumerate}
+  \item лабораторные индивидуальные
+  \item работы будут опубликованы
+  \item учёт ведётся по срокам сдачи:
+  \begin{enumerate}
+    \item сдано на паре-выдаче: 3
+    \item на следующей: 2
+    \item ещё позже: 1
+    \item и так далее
+  \end{enumerate}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+\frametitle{Переменные и типы данных}
+\framesubtitle{Простые типы}
+\begin{itemize}
+  \item<1-> Варианты?
+  \item<2-> Целые числа
+  \begin{enumerate}
+    \item byte
+    \item short
+    \item int
+    \item long
+  \end{enumerate}
+  \item<3-> Числа с плавающей точкой
+  \begin{enumerate}
+    \item float
+    \item double
+  \end{enumerate}
+  \item<4-> Символы
+  \begin{enumerate}
+    \item char
+  \end{enumerate}
+  \item<5-> Логические значения
+  \begin{enumerate}
+    \item boolean
+  \end{enumerate}
+\end{itemize}
+\end{frame}
+%\lstset{
+%  basicstyle=\footnotesize\tt,   % the size of the fonts that are used for the code
+%  breakatwhitespace=false,       % sets if automatic breaks should only happen at whitespace
+%  breaklines=true,               % sets automatic line breaking
+%  captionpos=b,                  % sets the caption-position to bottom
+%  extendedchars=true,            % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+%  frame=single,                  % adds a frame around the code
+%  language=Java,                 % the language of the code
+%  keywordstyle=\bf,
+%  showspaces=false,              % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+%  showstringspaces=false,        % underline spaces within strings only
+%  showtabs=false,                % show tabs within strings adding particular underscores
+%  tabsize=2                      % sets default tabsize to 2 spaces
+%}
+\definecolor{javared}{rgb}{0.6,0,0} % for strings
+\definecolor{javagreen}{rgb}{0.25,0.5,0.35} % comments
+\definecolor{javapurple}{rgb}{0.5,0,0.35} % keywords
+\definecolor{javadocblue}{rgb}{0.25,0.35,0.75} % javadoc
+ 
+\lstset{language=Java,
+basicstyle=\ttfamily,
+keywordstyle=\color{javapurple}\bfseries,
+stringstyle=\color{javared},
+commentstyle=\color{javagreen},
+morecomment=[s][\color{javadocblue}]{/**}{*/},
+numbers=left,
+numberstyle=\tiny\color{black},
+stepnumber=2,
+numbersep=10pt,
+tabsize=4,
+showspaces=false,
+frame=single,                  % adds a frame around the code
+showstringspaces=false}
+
+%\begin{frame}
+%\frametitle{frame title} 
+%\begin{center}
+%\includegraphics[width=0.8\paperwidth]{images/figure.png}
+%\end{center}
+%\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Переменные и типы данных}
+\framesubtitle{Применение}
+\begin{enumerate}
+  \item Шаблон:
+    \newlineтип идентификатор [=значение][, идентификатор [=значение] ...];
+    \newlineтип идентификатор[];
+  \item Область видимости переменных
+\end{enumerate}
+\begin{lstlisting}
+    byte hundred = 100;
+    short thousand = 1000;
+    int studentCount = 30;
+    long humanCount = 7.0E9;
+
+    float degree = 1.2;
+    double weight = 67.5;
+
+    char ch = 'J';
+
+    boolean b = true;
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Переменные и типы данных}
+\framesubtitle{Массивы}
+\begin{enumerate}
+  \item Шаблон:
+    \newlineтип идентификатор[ ] [= new тип [размер]];
+\end{enumerate}
+\begin{lstlisting}
+    int days[];
+    days = new int[30];
+    days[0] = 28;
+
+    int days[] = new int[30];
+
+    int year[][] = new int[12][31];
+
+    int houses[], cars[], wifes[];
+    int[] houses, cars, wifes;
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Операции}
+\begin{itemize}
+  \item<1-> Арифметические: + - * / \% ++ += -= *= /= \%= $--$
+  \item<2-> Поразрядные: $\sim$ \& | \^{} $>>$ $>>>$ $<<$ \&= |= \^{}= $>>=$ $>>>=$ $<<=$
+  \item<3-> Отношения: == != > < >= <=
+  \item<4-> Логические: \& | \^{} || \&\& ! \&= |= \^{}= == != ?:
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Операторы}
+\framesubtitle{Условный оператор}
+\begin{enumerate}
+  \item Шаблон:
+    \newline if (условие) инструкция1;
+    \newline else if (условие) инструкция2;
+    \newline else инструкция3;
+\end{enumerate}
+\begin{lstlisting}
+    if (studentsCount == 30)
+        deductSomeone();
+    else if (studentsCount < 10)
+        enrollSomeone();
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Операторы}
+\framesubtitle{Оператор ветвления}
+\begin{enumerate}
+  \item Шаблон:
+    \newline switch (выражение) \{
+    \newline     case значение1: инструкции; break;
+    \newline     case значение2: инструкции; break;
+    \newline     ...
+    \newline     default: инструкции по умолчанию
+    \newline \}
+\end{enumerate}
+\begin{lstlisting}
+    switch (mark) {
+        case 10:
+            System.out.println("Excellent!");
+            break;
+        default:
+            System.out.println("You can go hard or ...");
+    }
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Операторы}
+\framesubtitle{Циклы}
+\begin{enumerate}
+  \item while:
+    \newline while (условие) \{
+    \newline     инструкции
+    \newline \}
+  \item do-while:
+    \newline do \{
+    \newline     инструкции
+    \newline \} while (условие);
+  \item for:
+    \newline for (инициализация; условие; итерация) \{
+    \newline     инструкции
+    \newline \}
+  \item for each:
+    \newline for (тип переменная : коллекция) \{
+    \newline     инструкции
+    \newline \}
+\end{enumerate}
+\end{frame}
+
+\end{document}
